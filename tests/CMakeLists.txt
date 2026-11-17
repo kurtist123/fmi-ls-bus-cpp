@@ -19,41 +19,12 @@ FetchContent_MakeAvailable(googletest)
 
 include(GoogleTest)
 
-# Discover fmu4cpp if present locally
-set(FMU4CPP_INCLUDE_DIRS "")
-set(FMU4CPP_TEST_SOURCES "")
-
-foreach(CANDIDATE
-    "${CMAKE_CURRENT_SOURCE_DIR}/../../fmu4cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../fmu4cpp"
-    "${PROJECT_SOURCE_DIR}/../fmu4cpp"
-    "${PROJECT_SOURCE_DIR}/fmu4cpp"
-)
-    if(EXISTS "${CANDIDATE}/export/include/fmu4cpp/fmu_base.hpp")
-        set(FMU4CPP_INCLUDE_DIRS
-            "${CANDIDATE}/export/include"
-            "${CANDIDATE}/export/src"
-            "${CANDIDATE}/export/src/fmu4cpp"
-        )
-        if(EXISTS "${CANDIDATE}/export/src/fmu4cpp/fmu_base.cpp")
-            set(FMU4CPP_TEST_SOURCES
-                "${CANDIDATE}/export/src/fmu4cpp/fmu_base.cpp"
-                "${CANDIDATE}/export/src/fmu4cpp/fmu_variable.cpp"
-            )
-        endif()
-        break()
-    endif()
-endforeach()
-
 function(add_fmi_ls_bus_test test_name test_source)
     add_executable(${test_name} ${test_source} ${ARGN})
     target_link_libraries(${test_name} PRIVATE
         fmi_ls_bus_cpp
         GTest::gtest_main
     )
-    if(FMU4CPP_INCLUDE_DIRS)
-        target_include_directories(${test_name} PRIVATE ${FMU4CPP_INCLUDE_DIRS})
-    endif()
     gtest_discover_tests(${test_name})
 endfunction()
 
@@ -62,4 +33,3 @@ add_fmi_ls_bus_test(codec_test codec_test.cpp)
 add_fmi_ls_bus_test(hex_codec_test hex_codec_test.cpp)
 add_fmi_ls_bus_test(can_channel_test can_channel_test.cpp)
 add_fmi_ls_bus_test(metadata_test metadata_test.cpp)
-add_fmi_ls_bus_test(fmu4cpp_adapter_test fmu4cpp_adapter_test.cpp ${FMU4CPP_TEST_SOURCES})

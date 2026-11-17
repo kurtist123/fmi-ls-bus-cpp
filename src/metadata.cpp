@@ -7,11 +7,11 @@
  * For license terms, see the LICENSE file at the root of this project.
  */
 
-#include "fmi_ls_bus/adapter/metadata.hpp"
+#include "fmi_ls_bus/metadata/metadata.hpp"
 
 #include <sstream>
 
-namespace fmi_ls_bus::adapter
+namespace fmi_ls_bus::metadata
 {
 
 std::string MetadataGenerator::generate_terminals_and_icons(
@@ -81,4 +81,4 @@ std::string MetadataGenerator::generate_manifest(
     return oss.str();
 }
 
-}  // namespace fmi_ls_bus::adapter
+}  // namespace fmi_ls_bus::metadata

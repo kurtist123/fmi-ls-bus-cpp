@@ -6,13 +6,13 @@
  * For license terms, see the LICENSE file at the root of this project.
  */
 
-#ifndef FMI_LS_BUS_ADAPTER_METADATA_HPP
-#define FMI_LS_BUS_ADAPTER_METADATA_HPP
+#ifndef FMI_LS_BUS_METADATA_METADATA_HPP
+#define FMI_LS_BUS_METADATA_METADATA_HPP
 
 #include <string>
 #include <string_view>
 
-namespace fmi_ls_bus::adapter
+namespace fmi_ls_bus::metadata
 {
 
 /**
@@ -63,6 +63,12 @@ public:
     );
 };
 
+}  // namespace fmi_ls_bus::metadata
+
+namespace fmi_ls_bus::adapter
+{
+using TerminalConfig = ::fmi_ls_bus::metadata::TerminalConfig;
+using MetadataGenerator = ::fmi_ls_bus::metadata::MetadataGenerator;
 }  // namespace fmi_ls_bus::adapter
 
-#endif  // FMI_LS_BUS_ADAPTER_METADATA_HPP
+#endif  // FMI_LS_BUS_METADATA_METADATA_HPP

@@ -4,7 +4,7 @@
 
 A standalone C++17 library implementing the **Functional Mock-up Interface Layered Standard for Network Communication (FMI LS-BUS)** Low-Cut (Network Abstraction) protocol.
 
-Designed for virtual bus simulation, multi-frame batching, and integration with FMUs built using [fmu4cpp](https://github.com/Ecos-platform/fmu4cpp).
+Designed for virtual bus simulation, multi-frame batching, and integration with FMI 3.0 / FMI 2.0 simulation tooling and FMU frameworks (such as [fmu4cpp](https://github.com/Ecos-platform/fmu4cpp)).
 
 ## Documentation & Specification
 
@@ -23,8 +23,7 @@ The library features a strictly decoupled three-layer architecture:
 2. **Channel & Buffer Layer (`fmi_ls_bus::channel`)**
    - `FrameQueue`: Thread-safe, bounded FIFO queue with configurable overflow policies (drop-oldest, drop-newest, reject).
    - `CanChannel`: End-point managing TX and RX frame batching per simulation step, notification filtering, and bus-off error states.
-3. **FMU Integration Adapter Layer (`fmi_ls_bus::adapter`)**
-   - `Fmu4cppCanAdapter`: Connects CAN channel TX/RX queues to `fmu4cpp::fmu_base` binary variables and triggered clocks (`Tx_Clock`, `Rx_Clock`).
+3. **Metadata & FMI Manifest Layer (`fmi_ls_bus::metadata`)**
    - `MetadataGenerator`: Generates `terminalsAndIcons.xml` and `fmi-ls-manifest.xml` for FMI 3.0 layered standard compliance.
 
 ## Quick Start & Building

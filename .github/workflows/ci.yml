@@ -14,12 +14,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Checkout fmu4cpp (integration test dependency)
-        uses: actions/checkout@v4
-        with:
-          repository: Ecos-platform/fmu4cpp
-          path: fmu4cpp
-
       - name: Install dependencies
         run: |
           sudo apt-get update

@@ -9,9 +9,9 @@
 
 #include <gtest/gtest.h>
 
-#include "fmi_ls_bus/adapter/metadata.hpp"
+#include "fmi_ls_bus/metadata/metadata.hpp"
 
-using namespace fmi_ls_bus::adapter;
+using namespace fmi_ls_bus::metadata;
 
 TEST(MetadataTest, GenerateTerminalsAndIconsBasic)
 {
