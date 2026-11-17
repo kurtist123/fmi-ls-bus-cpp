@@ -2,7 +2,13 @@
 
 A standalone C++17 library implementing the **Functional Mock-up Interface Layered Standard for Network Communication (FMI LS-BUS)** Low-Cut (Network Abstraction) protocol.
 
-Designed for automotive and industrial virtual bus simulation, multi-frame batching, and integration with FMUs built using [fmu4cpp](https://github.com/Ecos-platform/fmu4cpp).
+Designed for virtual bus simulation, multi-frame batching, and integration with FMUs built using [fmu4cpp](https://github.com/Ecos-platform/fmu4cpp).
+
+## Documentation & Specification
+
+- [Architecture & Implementation Plan](docs/IMPLEMENTATION_PLAN.md)
+- [Repository Naming Proposal & Evaluation](docs/REPOSITORY_NAMING_PROPOSAL.md)
+- [Official FMI LS-BUS Specifications](docs/spec/README.md)
 
 ## Features
 
