@@ -8,27 +8,51 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # Export compile commands for tooling
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Header files
+# Library sources
+set(FMI_LS_BUS_SOURCES
+    src/serializer.cpp
+    src/deserializer.cpp
+    src/hex_codec.cpp
+)
+
+# Header files for IDE visibility
 set(FMI_LS_BUS_HEADERS
     include/fmi_ls_bus/protocol/constants.hpp
     include/fmi_ls_bus/protocol/types.hpp
     include/fmi_ls_bus/protocol/operations.hpp
     include/fmi_ls_bus/codec/endian.hpp
+    include/fmi_ls_bus/codec/serializer.hpp
+    include/fmi_ls_bus/codec/deserializer.hpp
+    include/fmi_ls_bus/codec/hex_codec.hpp
 )
 
-add_library(fmi_ls_bus_cpp INTERFACE)
+add_library(fmi_ls_bus_cpp
+    ${FMI_LS_BUS_SOURCES}
+    ${FMI_LS_BUS_HEADERS}
+)
+
 add_library(fmi_ls_bus::fmi_ls_bus ALIAS fmi_ls_bus_cpp)
 
-target_include_directories(fmi_ls_bus_cpp INTERFACE
+target_include_directories(fmi_ls_bus_cpp PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
+
+# Compiler warnings
+if(MSVC)
+    target_compile_options(fmi_ls_bus_cpp PRIVATE /W4 /WX-)
+else()
+    target_compile_options(fmi_ls_bus_cpp PRIVATE -Wall -Wextra -Wpedantic)
+endif()
 
 # Installation rules
 include(GNUInstallDirs)
 
 install(TARGETS fmi_ls_bus_cpp
     EXPORT fmi_ls_bus_cppTargets
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 

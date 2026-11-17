@@ -21,3 +21,5 @@ function(add_fmi_ls_bus_test test_name test_source)
 endfunction()
 
 add_fmi_ls_bus_test(test_endian test_endian.cpp)
+add_fmi_ls_bus_test(test_codec test_codec.cpp)
+add_fmi_ls_bus_test(test_hex_codec test_hex_codec.cpp)
