@@ -38,3 +38,6 @@ _deps/
 *.swo
 *~
 .DS_Store
+
+# Local external dependencies
+fmu4cpp/

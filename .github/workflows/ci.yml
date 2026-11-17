@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master, "phase-*" ]
+  pull_request:
+    branches: [ main, master, "phase-*" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Checkout fmu4cpp (integration test dependency)
+        uses: actions/checkout@v4
+        with:
+          repository: Ecos-platform/fmu4cpp
+          path: fmu4cpp
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake clang-format build-essential
+
+      - name: Verify clang-format
+        run: |
+          find include src tests -name '*.hpp' -o -name '*.cpp' | xargs clang-format --dry-run --Werror
+
+      - name: Configure CMake
+        run: |
+          cmake -B build -S . \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DFMI_LS_BUS_BUILD_TESTS=ON
+
+      - name: Build
+        run: |
+          cmake --build build --config Release --parallel
+
+      - name: Run Tests
+        run: |
+          ctest --test-dir build --output-on-failure
