@@ -19,6 +19,9 @@ namespace fmi_ls_bus::protocol
 
 #pragma pack(push, 1)
 
+/**
+ * @brief Common 8-byte operation header present at start of every wire frame
+ */
 struct WireHeader
 {
     uint32_t op_code;
@@ -27,6 +30,9 @@ struct WireHeader
 
 static_assert(sizeof(WireHeader) == 8, "WireHeader must be 8 bytes");
 
+/**
+ * @brief Fixed wire header layout for FormatError operations
+ */
 struct WireFormatErrorHeader
 {
     WireHeader header;
@@ -38,6 +44,9 @@ static_assert(
     "WireFormatErrorHeader must be 10 bytes"
 );
 
+/**
+ * @brief Fixed wire header layout for classic CAN transmit operations
+ */
 struct WireCanTransmitHeader
 {
     WireHeader header;
@@ -52,6 +61,9 @@ static_assert(
     "WireCanTransmitHeader must be 16 bytes"
 );
 
+/**
+ * @brief Fixed wire header layout for CAN-FD transmit operations
+ */
 struct WireCanFdTransmitHeader
 {
     WireHeader header;
@@ -67,6 +79,9 @@ static_assert(
     "WireCanFdTransmitHeader must be 17 bytes"
 );
 
+/**
+ * @brief Fixed wire header layout for CAN-XL transmit operations
+ */
 struct WireCanXlTransmitHeader
 {
     WireHeader header;
@@ -84,6 +99,9 @@ static_assert(
     "WireCanXlTransmitHeader must be 22 bytes"
 );
 
+/**
+ * @brief Wire layout for transmission confirmation operations
+ */
 struct WireConfirm
 {
     WireHeader header;
@@ -92,6 +110,9 @@ struct WireConfirm
 
 static_assert(sizeof(WireConfirm) == 12, "WireConfirm must be 12 bytes");
 
+/**
+ * @brief Wire layout for arbitration loss notification operations
+ */
 struct WireArbitrationLost
 {
     WireHeader header;
@@ -103,6 +124,9 @@ static_assert(
     "WireArbitrationLost must be 12 bytes"
 );
 
+/**
+ * @brief Wire layout for bus error notification operations
+ */
 struct WireBusError
 {
     WireHeader header;
@@ -114,6 +138,9 @@ struct WireBusError
 
 static_assert(sizeof(WireBusError) == 15, "WireBusError must be 15 bytes");
 
+/**
+ * @brief Wire layout for node status notification operations
+ */
 struct WireStatus
 {
     WireHeader header;
@@ -122,6 +149,9 @@ struct WireStatus
 
 static_assert(sizeof(WireStatus) == 9, "WireStatus must be 9 bytes");
 
+/**
+ * @brief Wire layout for bus wakeup operations
+ */
 struct WireWakeup
 {
     WireHeader header;
@@ -129,6 +159,9 @@ struct WireWakeup
 
 static_assert(sizeof(WireWakeup) == 8, "WireWakeup must be 8 bytes");
 
+/**
+ * @brief Wire layout for baudrate configuration parameter operations
+ */
 struct WireConfigurationBaudrate
 {
     WireHeader header;
@@ -141,6 +174,9 @@ static_assert(
     "WireConfigurationBaudrate must be 13 bytes"
 );
 
+/**
+ * @brief Wire layout for arbitration lost behavior configuration operations
+ */
 struct WireConfigurationArbitration
 {
     WireHeader header;

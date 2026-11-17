@@ -18,6 +18,10 @@
 namespace fmi_ls_bus::codec
 {
 
+/**
+ * @brief Result structure returned when attempting to deserialize a wire
+ * operation
+ */
 struct DeserializationResult
 {
     bool success{false};
@@ -26,19 +30,44 @@ struct DeserializationResult
     std::string error_message;
 };
 
+/**
+ * @brief Binary deserializer decoding wire byte streams into FMI LS-BUS
+ * operations
+ */
 class Deserializer
 {
 public:
+    /**
+     * @brief Deserializes the next operation from a byte buffer
+     *
+     * @param data Pointer to raw input byte buffer
+     * @param size Number of available bytes in data buffer
+     * @return DeserializationResult detailing success, bytes consumed, and
+     * operation or error
+     */
     static DeserializationResult deserialize_next(
         const uint8_t* data,
         size_t size
     );
 
+    /**
+     * @brief Deserializes all operations sequentially from a raw byte buffer
+     *
+     * @param data Pointer to raw input byte buffer
+     * @param size Number of available bytes in data buffer
+     * @return Vector of successfully decoded BusOperation variants
+     */
     static std::vector<protocol::BusOperation> deserialize_all(
         const uint8_t* data,
         size_t size
     );
 
+    /**
+     * @brief Deserializes all operations sequentially from a vector buffer
+     *
+     * @param buffer Byte vector containing serialized wire stream
+     * @return Vector of successfully decoded BusOperation variants
+     */
     static std::vector<protocol::BusOperation> deserialize_all(
         const std::vector<uint8_t>& buffer
     );

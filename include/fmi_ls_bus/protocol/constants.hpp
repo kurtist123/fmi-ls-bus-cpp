@@ -42,7 +42,9 @@ inline constexpr size_t CAN_MAX_PAYLOAD = 8;
 inline constexpr size_t CAN_FD_MAX_PAYLOAD = 64;
 inline constexpr size_t CAN_XL_MAX_PAYLOAD = 2'048;
 
-// Operation Codes
+/**
+ * @brief Operation codes defining the binary message type in FMI LS-BUS
+ */
 enum class OpCode : uint32_t
 {
     FormatError = 0x0001,
@@ -57,7 +59,9 @@ enum class OpCode : uint32_t
     Wakeup = 0x0042
 };
 
-// CAN Bus Error Codes
+/**
+ * @brief Standard CAN bus error categories reported by controllers
+ */
 enum class BusErrorCode : uint8_t
 {
     BitError = 0x01,
@@ -68,14 +72,18 @@ enum class BusErrorCode : uint8_t
     BrokenErrorFrame = 0x06
 };
 
-// Error Flags
+/**
+ * @brief Error flag designating primary or secondary error state
+ */
 enum class ErrorFlag : uint8_t
 {
     Primary = 0x01,
     Secondary = 0x02
 };
 
-// Node Status
+/**
+ * @brief CAN controller error state condition
+ */
 enum class NodeStatus : uint8_t
 {
     ErrorActive = 0x01,
@@ -83,7 +91,9 @@ enum class NodeStatus : uint8_t
     BusOff = 0x03
 };
 
-// Configuration Parameter Type
+/**
+ * @brief Parameter type identifier for bus configuration messages
+ */
 enum class ConfigParamType : uint8_t
 {
     CanBaudrate = 0x01,
@@ -92,7 +102,9 @@ enum class ConfigParamType : uint8_t
     ArbitrationLostBehavior = 0x04
 };
 
-// Arbitration Lost Behavior
+/**
+ * @brief Transmission policy when arbitration is lost on the bus
+ */
 enum class ArbitrationLostBehavior : uint8_t
 {
     BufferAndRetransmit = 0x01,

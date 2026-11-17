@@ -18,22 +18,40 @@
 namespace fmi_ls_bus::protocol
 {
 
+/**
+ * @brief Operation carrying raw unparsed payload when a wire format error
+ * occurs
+ */
 struct FormatError
 {
     std::vector<uint8_t> raw_data;
 
+    /**
+     * @brief Computes total wire-encoded byte length for this operation
+     *
+     * @return Total encoded size in bytes
+     */
     [[nodiscard]]
     size_t total_length() const noexcept
     {
         return FORMAT_ERROR_FIXED_SIZE + raw_data.size();
     }
 
+    /**
+     * @brief Equality comparison operator
+     *
+     * @param other Instance to compare with
+     * @return True if equal, false otherwise
+     */
     bool operator== (const FormatError& other) const noexcept
     {
         return raw_data == other.raw_data;
     }
 };
 
+/**
+ * @brief Operation representing standard classic CAN 2.0 frame transmission
+ */
 struct CanTransmit
 {
     uint32_t id{0};
@@ -42,6 +60,11 @@ struct CanTransmit
     uint16_t requested_rtr_length{0};  // For RTR frames where payload is empty
     std::vector<uint8_t> data;
 
+    /**
+     * @brief Computes total wire-encoded byte length for this operation
+     *
+     * @return Total encoded size in bytes
+     */
     [[nodiscard]]
     size_t total_length() const noexcept
     {
@@ -49,6 +72,12 @@ struct CanTransmit
         return CAN_TRANSMIT_FIXED_SIZE + (remote_frame ? 0 : data.size());
     }
 
+    /**
+     * @brief Equality comparison operator
+     *
+     * @param other Instance to compare with
+     * @return True if equal, false otherwise
+     */
     bool operator== (const CanTransmit& other) const noexcept
     {
         return id == other.id && extended_id == other.extended_id &&
@@ -58,6 +87,10 @@ struct CanTransmit
     }
 };
 
+/**
+ * @brief Operation representing CAN Flexible Data-Rate (CAN-FD) frame
+ * transmission
+ */
 struct CanFdTransmit
 {
     uint32_t id{0};
@@ -66,12 +99,23 @@ struct CanFdTransmit
     bool error_state_indicator{false};
     std::vector<uint8_t> data;
 
+    /**
+     * @brief Computes total wire-encoded byte length for this operation
+     *
+     * @return Total encoded size in bytes
+     */
     [[nodiscard]]
     size_t total_length() const noexcept
     {
         return CAN_FD_TRANSMIT_FIXED_SIZE + data.size();
     }
 
+    /**
+     * @brief Equality comparison operator
+     *
+     * @param other Instance to compare with
+     * @return True if equal, false otherwise
+     */
     bool operator== (const CanFdTransmit& other) const noexcept
     {
         return id == other.id && extended_id == other.extended_id &&
@@ -81,6 +125,9 @@ struct CanFdTransmit
     }
 };
 
+/**
+ * @brief Operation representing CAN Extra Long (CAN-XL) frame transmission
+ */
 struct CanXlTransmit
 {
     uint32_t id{0};
@@ -91,12 +138,23 @@ struct CanXlTransmit
     uint32_t acceptance_field{0};
     std::vector<uint8_t> data;
 
+    /**
+     * @brief Computes total wire-encoded byte length for this operation
+     *
+     * @return Total encoded size in bytes
+     */
     [[nodiscard]]
     size_t total_length() const noexcept
     {
         return CAN_XL_TRANSMIT_FIXED_SIZE + data.size();
     }
 
+    /**
+     * @brief Equality comparison operator
+     *
+     * @param other Instance to compare with
+     * @return True if equal, false otherwise
+     */
     bool operator== (const CanXlTransmit& other) const noexcept
     {
         return id == other.id && extended_id == other.extended_id &&
@@ -106,38 +164,69 @@ struct CanXlTransmit
     }
 };
 
+/**
+ * @brief Operation indicating positive transmission confirmation for an ID
+ */
 struct Confirm
 {
     uint32_t id{0};
 
+    /**
+     * @brief Computes total wire-encoded byte length for this operation
+     *
+     * @return Total encoded size in bytes
+     */
     [[nodiscard]]
     size_t total_length() const noexcept
     {
         return CONFIRM_SIZE;
     }
 
+    /**
+     * @brief Equality comparison operator
+     *
+     * @param other Instance to compare with
+     * @return True if equal, false otherwise
+     */
     bool operator== (const Confirm& other) const noexcept
     {
         return id == other.id;
     }
 };
 
+/**
+ * @brief Operation indicating arbitration loss on the bus for a transmitted ID
+ */
 struct ArbitrationLost
 {
     uint32_t id{0};
 
+    /**
+     * @brief Computes total wire-encoded byte length for this operation
+     *
+     * @return Total encoded size in bytes
+     */
     [[nodiscard]]
     size_t total_length() const noexcept
     {
         return ARBITRATION_LOST_SIZE;
     }
 
+    /**
+     * @brief Equality comparison operator
+     *
+     * @param other Instance to compare with
+     * @return True if equal, false otherwise
+     */
     bool operator== (const ArbitrationLost& other) const noexcept
     {
         return id == other.id;
     }
 };
 
+/**
+ * @brief Operation representing bus error notification
+ */
 struct BusError
 {
     uint32_t id{0};
@@ -145,12 +234,23 @@ struct BusError
     ErrorFlag error_flag{ErrorFlag::Primary};
     bool is_sender{false};
 
+    /**
+     * @brief Computes total wire-encoded byte length for this operation
+     *
+     * @return Total encoded size in bytes
+     */
     [[nodiscard]]
     size_t total_length() const noexcept
     {
         return BUS_ERROR_SIZE;
     }
 
+    /**
+     * @brief Equality comparison operator
+     *
+     * @param other Instance to compare with
+     * @return True if equal, false otherwise
+     */
     bool operator== (const BusError& other) const noexcept
     {
         return id == other.id && error_code == other.error_code &&
@@ -158,6 +258,10 @@ struct BusError
     }
 };
 
+/**
+ * @brief Operation configuring bus parameters such as baudrate or arbitration
+ * behavior
+ */
 struct Configuration
 {
     ConfigParamType param_type{ConfigParamType::CanBaudrate};
@@ -166,6 +270,11 @@ struct Configuration
         ArbitrationLostBehavior::BufferAndRetransmit
     };
 
+    /**
+     * @brief Computes total wire-encoded byte length for this operation
+     *
+     * @return Total encoded size in bytes
+     */
     [[nodiscard]]
     size_t total_length() const noexcept
     {
@@ -176,6 +285,12 @@ struct Configuration
         return CONFIGURATION_BAUDRATE_SIZE;
     }
 
+    /**
+     * @brief Equality comparison operator
+     *
+     * @param other Instance to compare with
+     * @return True if equal, false otherwise
+     */
     bool operator== (const Configuration& other) const noexcept
     {
         if (param_type != other.param_type)
@@ -190,36 +305,68 @@ struct Configuration
     }
 };
 
+/**
+ * @brief Operation notifying bus node controller state change
+ */
 struct Status
 {
     NodeStatus status{NodeStatus::ErrorActive};
 
+    /**
+     * @brief Computes total wire-encoded byte length for this operation
+     *
+     * @return Total encoded size in bytes
+     */
     [[nodiscard]]
     size_t total_length() const noexcept
     {
         return STATUS_SIZE;
     }
 
+    /**
+     * @brief Equality comparison operator
+     *
+     * @param other Instance to compare with
+     * @return True if equal, false otherwise
+     */
     bool operator== (const Status& other) const noexcept
     {
         return status == other.status;
     }
 };
 
+/**
+ * @brief Operation signaling bus wake-up pattern or event
+ */
 struct Wakeup
 {
+    /**
+     * @brief Computes total wire-encoded byte length for this operation
+     *
+     * @return Total encoded size in bytes
+     */
     [[nodiscard]]
     size_t total_length() const noexcept
     {
         return WAKEUP_SIZE;
     }
 
+    /**
+     * @brief Equality comparison operator
+     *
+     * @param other Instance to compare with
+     * @return True if equal, false otherwise
+     */
     bool operator== (const Wakeup&) const noexcept
     {
         return true;
     }
 };
 
+/**
+ * @brief Tagged union variant encapsulating any supported FMI LS-BUS low-cut
+ * operation
+ */
 using BusOperation = std::variant<
     FormatError,
     CanTransmit,
@@ -232,6 +379,12 @@ using BusOperation = std::variant<
     Status,
     Wakeup>;
 
+/**
+ * @brief Retrieves the OpCode enum associated with a BusOperation variant
+ *
+ * @param op BusOperation variant instance
+ * @return OpCode corresponding to the active variant alternative
+ */
 inline OpCode get_op_code(const BusOperation& op) noexcept
 {
     return std::visit(
@@ -282,6 +435,12 @@ inline OpCode get_op_code(const BusOperation& op) noexcept
     );
 }
 
+/**
+ * @brief Computes total wire-encoded byte length for a BusOperation variant
+ *
+ * @param op BusOperation variant instance
+ * @return Total encoded size in bytes
+ */
 inline size_t get_total_length(const BusOperation& op) noexcept
 {
     return std::visit([](const auto& o) { return o.total_length(); }, op);

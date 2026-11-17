@@ -16,11 +16,25 @@
 namespace fmi_ls_bus::codec
 {
 
+/**
+ * @brief Reads a 16-bit unsigned integer from a byte buffer in little-endian
+ * order
+ *
+ * @param src Pointer to source buffer containing at least 2 bytes
+ * @return Decoded 16-bit unsigned integer value
+ */
 inline uint16_t read_le_u16(const uint8_t* src) noexcept
 {
     return static_cast<uint16_t>(src[0]) | (static_cast<uint16_t>(src[1]) << 8);
 }
 
+/**
+ * @brief Reads a 32-bit unsigned integer from a byte buffer in little-endian
+ * order
+ *
+ * @param src Pointer to source buffer containing at least 4 bytes
+ * @return Decoded 32-bit unsigned integer value
+ */
 inline uint32_t read_le_u32(const uint8_t* src) noexcept
 {
     return static_cast<uint32_t>(src[0]) |
@@ -29,6 +43,13 @@ inline uint32_t read_le_u32(const uint8_t* src) noexcept
            (static_cast<uint32_t>(src[3]) << 24);
 }
 
+/**
+ * @brief Reads a 64-bit unsigned integer from a byte buffer in little-endian
+ * order
+ *
+ * @param src Pointer to source buffer containing at least 8 bytes
+ * @return Decoded 64-bit unsigned integer value
+ */
 inline uint64_t read_le_u64(const uint8_t* src) noexcept
 {
     uint64_t val = 0;
@@ -39,12 +60,26 @@ inline uint64_t read_le_u64(const uint8_t* src) noexcept
     return val;
 }
 
+/**
+ * @brief Writes a 16-bit unsigned integer into a byte buffer in little-endian
+ * order
+ *
+ * @param dst Pointer to destination buffer with space for at least 2 bytes
+ * @param val 16-bit unsigned integer value to encode
+ */
 inline void write_le_u16(uint8_t* dst, uint16_t val) noexcept
 {
     dst[0] = static_cast<uint8_t>(val & 0xFF);
     dst[1] = static_cast<uint8_t>((val >> 8) & 0xFF);
 }
 
+/**
+ * @brief Writes a 32-bit unsigned integer into a byte buffer in little-endian
+ * order
+ *
+ * @param dst Pointer to destination buffer with space for at least 4 bytes
+ * @param val 32-bit unsigned integer value to encode
+ */
 inline void write_le_u32(uint8_t* dst, uint32_t val) noexcept
 {
     dst[0] = static_cast<uint8_t>(val & 0xFF);
@@ -53,6 +88,13 @@ inline void write_le_u32(uint8_t* dst, uint32_t val) noexcept
     dst[3] = static_cast<uint8_t>((val >> 24) & 0xFF);
 }
 
+/**
+ * @brief Writes a 64-bit unsigned integer into a byte buffer in little-endian
+ * order
+ *
+ * @param dst Pointer to destination buffer with space for at least 8 bytes
+ * @param val 64-bit unsigned integer value to encode
+ */
 inline void write_le_u64(uint8_t* dst, uint64_t val) noexcept
 {
     for (size_t i = 0; i < 8; ++i)
@@ -61,6 +103,14 @@ inline void write_le_u64(uint8_t* dst, uint64_t val) noexcept
     }
 }
 
+/**
+ * @brief Generic template helper to read an integral value in little-endian
+ * order
+ *
+ * @tparam T Integral type to read (1, 2, 4, or 8 bytes)
+ * @param src Pointer to source buffer containing sufficient bytes for type T
+ * @return Decoded value of type T
+ */
 template <typename T>
 inline T read_le(const uint8_t* src) noexcept
 {
@@ -83,6 +133,14 @@ inline T read_le(const uint8_t* src) noexcept
     }
 }
 
+/**
+ * @brief Generic template helper to write an integral value in little-endian
+ * order
+ *
+ * @tparam T Integral type to write (1, 2, 4, or 8 bytes)
+ * @param dst Pointer to destination buffer with sufficient space for type T
+ * @param val Value of type T to encode
+ */
 template <typename T>
 inline void write_le(uint8_t* dst, T val) noexcept
 {

@@ -35,6 +35,10 @@
 namespace fmi_ls_bus::adapter
 {
 
+/**
+ * @brief Configuration parameters for binding FMU variables and value
+ * references
+ */
 struct AdapterConfig
 {
     std::string bus_name{"CAN"};
@@ -46,9 +50,20 @@ struct AdapterConfig
     uint32_t rx_clock_vr{1'004};
 };
 
+/**
+ * @brief Adapter coupling a CanChannel to fmu4cpp FMU model variables and
+ * clocks
+ */
 class Fmu4cppCanAdapter
 {
 public:
+    /**
+     * @brief Constructs an adapter with specified channel and adapter settings
+     *
+     * @param channel_config Configuration for underlying CanChannel
+     * @param adapter_config Configuration for FMU value references and variable
+     * names
+     */
     explicit Fmu4cppCanAdapter(
         channel::CanChannelConfig channel_config = {},
         AdapterConfig adapter_config = {}
@@ -58,58 +73,101 @@ public:
     {
     }
 
+    /**
+     * @brief Returns mutable reference to underlying CAN channel
+     *
+     * @return Reference to CanChannel instance
+     */
     [[nodiscard]]
     channel::CanChannel& channel() noexcept
     {
         return channel_;
     }
 
+    /**
+     * @brief Returns const reference to underlying CAN channel
+     *
+     * @return Const reference to CanChannel instance
+     */
     [[nodiscard]]
     const channel::CanChannel& channel() const noexcept
     {
         return channel_;
     }
 
+    /**
+     * @brief Returns adapter configuration
+     *
+     * @return Const reference to AdapterConfig
+     */
     [[nodiscard]]
     const AdapterConfig& config() const noexcept
     {
         return adapter_config_;
     }
 
+    /**
+     * @brief Returns mutable reference to internal transmit byte buffer
+     *
+     * @return Reference to TX byte vector
+     */
     [[nodiscard]]
     std::vector<uint8_t>& tx_buffer() noexcept
     {
         return tx_buffer_;
     }
 
+    /**
+     * @brief Returns const reference to internal transmit byte buffer
+     *
+     * @return Const reference to TX byte vector
+     */
     [[nodiscard]]
     const std::vector<uint8_t>& tx_buffer() const noexcept
     {
         return tx_buffer_;
     }
 
+    /**
+     * @brief Returns mutable reference to internal receive byte buffer
+     *
+     * @return Reference to RX byte vector
+     */
     [[nodiscard]]
     std::vector<uint8_t>& rx_buffer() noexcept
     {
         return rx_buffer_;
     }
 
+    /**
+     * @brief Returns const reference to internal receive byte buffer
+     *
+     * @return Const reference to RX byte vector
+     */
     [[nodiscard]]
     const std::vector<uint8_t>& rx_buffer() const noexcept
     {
         return rx_buffer_;
     }
 
-    /// Bind adapter variables to an FMU model instance.
-    /// Requires that FmuModel grants friendship to Fmu4cppCanAdapter (e.g. via
-    /// FMI_LS_BUS_FMU4CPP_ADAPTER_FRIEND) or exposes public registration
-    /// methods.
+    /**
+     * @brief Binds adapter variables and clocks to an FMU model instance
+     *
+     * @tparam FmuModel Type of FMU model
+     * @param fmu Target FMU model instance
+     */
     template <typename FmuModel>
     void bind(FmuModel& fmu)
     {
         bind_fmu(fmu);
     }
 
+    /**
+     * @brief Registers binary variables and clocks with the FMU model instance
+     *
+     * @tparam FmuModel Type of FMU model
+     * @param fmu Target FMU model instance
+     */
     template <typename FmuModel>
     void bind_fmu(FmuModel& fmu)
     {
@@ -150,8 +208,14 @@ public:
 #endif
     }
 
-    /// Explicit variable binding via registration functors (requires zero
-    /// friendship).
+    /**
+     * @brief Registers variables using caller-supplied registration functors
+     *
+     * @tparam BinaryRegFunc Callable with signature (name, buffer_ptr)
+     * @tparam ClockRegFunc Callable with signature (name, vr, causality)
+     * @param reg_binary Registration callback for binary variables
+     * @param reg_clock Registration callback for clocks
+     */
     template <typename BinaryRegFunc, typename ClockRegFunc>
     void register_variables(
         BinaryRegFunc&& reg_binary,
@@ -196,6 +260,13 @@ public:
 #endif
     }
 
+    /**
+     * @brief Post-step hook packing pending transmit operations into TX buffer
+     * and signaling clock
+     *
+     * @tparam FmuModel Type of FMU model
+     * @param fmu Target FMU model instance
+     */
     template <typename FmuModel>
     void post_step(FmuModel& fmu)
     {
@@ -210,6 +281,13 @@ public:
         }
     }
 
+    /**
+     * @brief Handles FMI event mode, unpacking incoming RX buffer when clock is
+     * ticked
+     *
+     * @tparam FmuModel Type of FMU model
+     * @param fmu Target FMU model instance
+     */
     template <typename FmuModel>
     void handle_event_mode(FmuModel& fmu)
     {
@@ -223,6 +301,12 @@ public:
         }
     }
 
+    /**
+     * @brief Creates a TerminalConfig structure matching the adapter settings
+     *
+     * @return TerminalConfig instance populated with current adapter names and
+     * settings
+     */
     [[nodiscard]]
     TerminalConfig make_terminal_config() const
     {
@@ -246,14 +330,25 @@ private:
 };
 
 #if FMI_LS_BUS_HAS_FMU4CPP
-/// Optional CRTP / mixin base class providing an embedded Fmu4cppCanAdapter
-/// with automated variable registration in its constructor.
+/**
+ * @brief CRTP mixin base class providing an embedded Fmu4cppCanAdapter with
+ * automated variable registration
+ *
+ * @tparam DerivedModel Derived FMU class type
+ */
 template <typename DerivedModel>
 class Fmu4cppCanModel : public fmu4cpp::fmu_base
 {
     FMI_LS_BUS_FMU4CPP_ADAPTER_FRIEND
 
 public:
+    /**
+     * @brief Constructs the FMU model and initializes the embedded CAN adapter
+     *
+     * @param data FMU model metadata and initialization structure
+     * @param channel_config CanChannel configuration
+     * @param adapter_config Adapter variable configuration
+     */
     explicit Fmu4cppCanModel(
         fmu4cpp::fmu_data data,
         channel::CanChannelConfig channel_config = {},
@@ -265,12 +360,22 @@ public:
         can_adapter_.bind_fmu(*this);
     }
 
+    /**
+     * @brief Returns mutable reference to embedded CAN adapter
+     *
+     * @return Reference to Fmu4cppCanAdapter
+     */
     [[nodiscard]]
     Fmu4cppCanAdapter& can_adapter() noexcept
     {
         return can_adapter_;
     }
 
+    /**
+     * @brief Returns const reference to embedded CAN adapter
+     *
+     * @return Const reference to Fmu4cppCanAdapter
+     */
     [[nodiscard]]
     const Fmu4cppCanAdapter& can_adapter() const noexcept
     {
