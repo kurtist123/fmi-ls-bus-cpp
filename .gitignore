@@ -1,0 +1,40 @@
+# Build directories
+build/
+bin/
+lib/
+out/
+_build/
+.cache/
+
+# Compiled Object files & libraries
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+
+# Prerequisites & Precompiled Headers
+*.d
+*.gch
+*.pch
+
+# CMake temporary files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+CTestTestfile.cmake
+Testing/
+_deps/
+
+# IDE and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
