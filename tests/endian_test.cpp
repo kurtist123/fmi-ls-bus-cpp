@@ -1,5 +1,5 @@
 /**
- * @file test_endian.cpp
+ * @file endian_test.cpp
  * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
  * @brief Unit tests for endian conversions, protocol constants, and types
  *

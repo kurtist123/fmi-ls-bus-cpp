@@ -1,5 +1,5 @@
 /**
- * @file test_codec.cpp
+ * @file codec_test.cpp
  * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
  * @brief Unit tests for binary wire serializer, deserializer, and batching
  *

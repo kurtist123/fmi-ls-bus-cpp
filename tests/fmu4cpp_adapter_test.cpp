@@ -1,5 +1,5 @@
 /**
- * @file test_fmu4cpp_adapter.cpp
+ * @file fmu4cpp_adapter_test.cpp
  * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
  * @brief Unit and integration tests for fmu4cpp FMU model adapter
  *

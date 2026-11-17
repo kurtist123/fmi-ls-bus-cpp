@@ -1,5 +1,5 @@
 /**
- * @file test_can_channel.cpp
+ * @file can_channel_test.cpp
  * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
  * @brief Unit tests for CAN channel queuing, batching, and overflow policies
  *

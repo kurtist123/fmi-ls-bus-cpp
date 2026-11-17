@@ -1,5 +1,5 @@
 /**
- * @file test_metadata.cpp
+ * @file metadata_test.cpp
  * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
  * @brief Unit tests for FMI 3.0 terminals and layered standard metadata
  * generation

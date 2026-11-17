@@ -1,5 +1,5 @@
 /**
- * @file test_hex_codec.cpp
+ * @file hex_codec_test.cpp
  * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
  * @brief Unit tests for hex encoding and decoding
  *
