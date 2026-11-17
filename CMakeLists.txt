@@ -13,6 +13,7 @@ set(FMI_LS_BUS_SOURCES
     src/serializer.cpp
     src/deserializer.cpp
     src/hex_codec.cpp
+    src/can_channel.cpp
 )
 
 # Header files for IDE visibility
@@ -24,6 +25,8 @@ set(FMI_LS_BUS_HEADERS
     include/fmi_ls_bus/codec/serializer.hpp
     include/fmi_ls_bus/codec/deserializer.hpp
     include/fmi_ls_bus/codec/hex_codec.hpp
+    include/fmi_ls_bus/channel/frame_queue.hpp
+    include/fmi_ls_bus/channel/can_channel.hpp
 )
 
 add_library(fmi_ls_bus_cpp
