@@ -1,3 +1,11 @@
+/**
+ * @file metadata.hpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Generators for FMI 3.0 terminalsAndIcons.xml and fmi-ls-manifest.xml
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #ifndef FMI_LS_BUS_ADAPTER_METADATA_HPP
 #define FMI_LS_BUS_ADAPTER_METADATA_HPP
 

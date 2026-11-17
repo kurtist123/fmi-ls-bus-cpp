@@ -1,3 +1,11 @@
+/**
+ * @file test_can_channel.cpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Unit tests for CAN channel queuing, batching, and overflow policies
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #include <gtest/gtest.h>
 
 #include "fmi_ls_bus/channel/can_channel.hpp"

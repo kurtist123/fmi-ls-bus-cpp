@@ -1,3 +1,12 @@
+/**
+ * @file constants.hpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Protocol constants, magic bytes, opcodes, and size limits for FMI
+ * LS-BUS
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #ifndef FMI_LS_BUS_PROTOCOL_CONSTANTS_HPP
 #define FMI_LS_BUS_PROTOCOL_CONSTANTS_HPP
 

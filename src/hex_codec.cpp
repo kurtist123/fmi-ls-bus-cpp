@@ -1,3 +1,11 @@
+/**
+ * @file hex_codec.cpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Implementation of hexadecimal string encoder and decoder
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #include "fmi_ls_bus/codec/hex_codec.hpp"
 
 #include <cctype>

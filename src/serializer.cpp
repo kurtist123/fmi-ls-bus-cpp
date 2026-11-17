@@ -1,3 +1,11 @@
+/**
+ * @file serializer.cpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Implementation of binary wire serializer for FMI LS-BUS
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #include "fmi_ls_bus/codec/serializer.hpp"
 
 #include <cstring>

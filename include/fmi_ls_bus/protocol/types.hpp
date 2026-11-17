@@ -1,3 +1,11 @@
+/**
+ * @file types.hpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Protocol enumeration types, error codes, and flags for FMI LS-BUS
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #ifndef FMI_LS_BUS_PROTOCOL_TYPES_HPP
 #define FMI_LS_BUS_PROTOCOL_TYPES_HPP
 

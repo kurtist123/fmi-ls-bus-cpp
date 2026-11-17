@@ -1,3 +1,11 @@
+############################################################
+# @file CMakeLists.txt
+# @brief Top-level CMake configuration for fmi-ls-bus-cpp library
+#
+# Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+# For license terms, see the LICENSE file at the root of this project.
+############################################################
+
 cmake_minimum_required(VERSION 3.20)
 project(fmi_ls_bus_cpp VERSION 1.0.0 LANGUAGES CXX)
 

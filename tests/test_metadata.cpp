@@ -1,3 +1,12 @@
+/**
+ * @file test_metadata.cpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Unit tests for FMI 3.0 terminals and layered standard metadata
+ * generation
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #include <gtest/gtest.h>
 
 #include "fmi_ls_bus/adapter/metadata.hpp"

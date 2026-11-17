@@ -1,3 +1,11 @@
+/**
+ * @file serializer.hpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Binary serializer for FMI LS-BUS low-cut operations
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #ifndef FMI_LS_BUS_CODEC_SERIALIZER_HPP
 #define FMI_LS_BUS_CODEC_SERIALIZER_HPP
 

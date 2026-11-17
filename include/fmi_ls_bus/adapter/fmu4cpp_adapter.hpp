@@ -1,3 +1,11 @@
+/**
+ * @file fmu4cpp_adapter.hpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Integration adapter between fmi_ls_bus channel and fmu4cpp FMU models
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #ifndef FMI_LS_BUS_ADAPTER_FMU4CPP_ADAPTER_HPP
 #define FMI_LS_BUS_ADAPTER_FMU4CPP_ADAPTER_HPP
 

@@ -1,3 +1,11 @@
+/**
+ * @file can_channel.cpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Implementation of CAN channel batching, filtering, and queuing
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #include "fmi_ls_bus/channel/can_channel.hpp"
 
 #include "fmi_ls_bus/codec/deserializer.hpp"

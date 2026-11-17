@@ -1,3 +1,11 @@
+/**
+ * @file test_hex_codec.cpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Unit tests for hex encoding and decoding
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #include <gtest/gtest.h>
 
 #include "fmi_ls_bus/codec/hex_codec.hpp"

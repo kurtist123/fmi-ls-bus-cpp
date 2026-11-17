@@ -1,3 +1,11 @@
+/**
+ * @file fmi_ls_bus.hpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Main convenience header for the fmi-ls-bus-cpp library
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #ifndef FMI_LS_BUS_HPP
 #define FMI_LS_BUS_HPP
 

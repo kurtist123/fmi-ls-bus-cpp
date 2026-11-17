@@ -1,3 +1,11 @@
+/**
+ * @file operations.hpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Operation data structures and variant definition for FMI LS-BUS
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #ifndef FMI_LS_BUS_PROTOCOL_OPERATIONS_HPP
 #define FMI_LS_BUS_PROTOCOL_OPERATIONS_HPP
 

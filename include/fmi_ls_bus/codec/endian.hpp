@@ -1,3 +1,11 @@
+/**
+ * @file endian.hpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Little-endian encoding and decoding utilities for wire serialization
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #ifndef FMI_LS_BUS_CODEC_ENDIAN_HPP
 #define FMI_LS_BUS_CODEC_ENDIAN_HPP
 

@@ -1,3 +1,11 @@
+############################################################
+# @file CMakeLists.txt
+# @brief CMake configuration and test suite definition for fmi-ls-bus-cpp
+#
+# Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+# For license terms, see the LICENSE file at the root of this project.
+############################################################
+
 cmake_minimum_required(VERSION 3.20)
 
 include(FetchContent)

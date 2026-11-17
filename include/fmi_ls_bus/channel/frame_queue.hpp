@@ -1,3 +1,11 @@
+/**
+ * @file frame_queue.hpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Thread-safe bounded FIFO queue with overflow policies
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #ifndef FMI_LS_BUS_CHANNEL_FRAME_QUEUE_HPP
 #define FMI_LS_BUS_CHANNEL_FRAME_QUEUE_HPP
 

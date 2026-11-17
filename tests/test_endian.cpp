@@ -1,3 +1,11 @@
+/**
+ * @file test_endian.cpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Unit tests for endian conversions, protocol constants, and types
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #include <gtest/gtest.h>
 
 #include "fmi_ls_bus/codec/endian.hpp"

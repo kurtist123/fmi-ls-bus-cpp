@@ -1,3 +1,11 @@
+/**
+ * @file can_channel.hpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief CAN endpoint channel managing TX/RX queues and step batching
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #ifndef FMI_LS_BUS_CHANNEL_CAN_CHANNEL_HPP
 #define FMI_LS_BUS_CHANNEL_CAN_CHANNEL_HPP
 

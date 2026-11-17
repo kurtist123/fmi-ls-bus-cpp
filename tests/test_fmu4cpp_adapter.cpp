@@ -1,3 +1,11 @@
+/**
+ * @file test_fmu4cpp_adapter.cpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Unit and integration tests for fmu4cpp FMU model adapter
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #include <unordered_map>
 
 #include <gtest/gtest.h>

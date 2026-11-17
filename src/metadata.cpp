@@ -1,3 +1,12 @@
+/**
+ * @file metadata.cpp
+ * @copyright Copyright (c) 2026 Kurtis Thrush. All rights reserved.
+ * @brief Implementation of FMI 3.0 terminals and layered standard metadata
+ * generator
+ *
+ * For license terms, see the LICENSE file at the root of this project.
+ */
+
 #include "fmi_ls_bus/adapter/metadata.hpp"
 
 #include <sstream>
