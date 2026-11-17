@@ -14,10 +14,12 @@ set(FMI_LS_BUS_SOURCES
     src/deserializer.cpp
     src/hex_codec.cpp
     src/can_channel.cpp
+    src/metadata.cpp
 )
 
 # Header files for IDE visibility
 set(FMI_LS_BUS_HEADERS
+    include/fmi_ls_bus/fmi_ls_bus.hpp
     include/fmi_ls_bus/protocol/constants.hpp
     include/fmi_ls_bus/protocol/types.hpp
     include/fmi_ls_bus/protocol/operations.hpp
@@ -27,6 +29,8 @@ set(FMI_LS_BUS_HEADERS
     include/fmi_ls_bus/codec/hex_codec.hpp
     include/fmi_ls_bus/channel/frame_queue.hpp
     include/fmi_ls_bus/channel/can_channel.hpp
+    include/fmi_ls_bus/adapter/metadata.hpp
+    include/fmi_ls_bus/adapter/fmu4cpp_adapter.hpp
 )
 
 add_library(fmi_ls_bus_cpp
@@ -40,6 +44,20 @@ target_include_directories(fmi_ls_bus_cpp PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
+
+# If fmu4cpp is present in the workspace, add its export/include for adapter integration
+foreach(CANDIDATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/../fmu4cpp/export/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../fmu4cpp/export/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/fmu4cpp/export/include"
+)
+    if(EXISTS "${CANDIDATE}")
+        target_include_directories(fmi_ls_bus_cpp PUBLIC
+            $<BUILD_INTERFACE:${CANDIDATE}>
+        )
+        break()
+    endif()
+endforeach()
 
 # Compiler warnings
 if(MSVC)
