@@ -33,3 +33,11 @@ add_fmi_ls_bus_test(codec_test codec_test.cpp)
 add_fmi_ls_bus_test(hex_codec_test hex_codec_test.cpp)
 add_fmi_ls_bus_test(can_channel_test can_channel_test.cpp)
 add_fmi_ls_bus_test(metadata_test metadata_test.cpp)
+
+add_test(
+    NAME FmiLsBusGenerateMetadataCMakeTest
+    COMMAND ${CMAKE_COMMAND}
+        -DFMI_LS_BUS_CMAKE_MODULE=${CMAKE_CURRENT_SOURCE_DIR}/../cmake/FmiLsBusGenerateMetadata.cmake
+        -DTEST_OUTPUT_DIR=${CMAKE_CURRENT_BINARY_DIR}/test_metadata
+        -P ${CMAKE_CURRENT_SOURCE_DIR}/test_generate_metadata.cmake
+)

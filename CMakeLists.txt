@@ -52,6 +52,10 @@ target_include_directories(fmi_ls_bus_cpp PUBLIC
     $<INSTALL_INTERFACE:include>
 )
 
+# CMake helper modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/FmiLsBusGenerateMetadata.cmake")
+
 # Compiler warnings
 if(MSVC)
     target_compile_options(fmi_ls_bus_cpp PRIVATE /W4 /WX-)
@@ -72,6 +76,10 @@ install(TARGETS fmi_ls_bus_cpp
 
 install(DIRECTORY include/fmi_ls_bus
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+
+install(FILES cmake/FmiLsBusGenerateMetadata.cmake
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/fmi_ls_bus_cpp
 )
 
 # Testing configuration
